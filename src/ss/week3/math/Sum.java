@@ -11,21 +11,25 @@ public class Sum implements Integrable{
 	}
 	
 	//commands
+		@Override
 		public double apply(double argument) {
 			value = one.apply(argument) + two.apply(argument);
 			return value;
 		}
 		
+		@Override
 		public Function derivative() {
 			Function derivativeOne = one.derivative(); 
 			Function derivativeTwo = two.derivative();
 			return new Sum (derivativeOne, derivativeTwo);
 		}
 		
+		@Override
 		public String toString() {
 			return one.toString() + "+" + two.toString();
 		}
 		
+		@Override
 		public Integrable integral() {
 			if (one instanceof Integrable && two instanceof Integrable) {
 				return new Sum(((Integrable)one).integral(), ((Integrable)two).integral());

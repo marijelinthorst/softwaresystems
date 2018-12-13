@@ -34,3 +34,4 @@ public class ProductTest {
         assertEquals(0.0, product.derivative().apply(0), DELTA);
     }
 }
+

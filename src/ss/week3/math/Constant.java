@@ -8,18 +8,22 @@ public class Constant implements Integrable {
 	}
 	
 	//commands
+	@Override
 	public double apply(double argument) {
 		return constant;
 	}
 	
+	@Override
 	public Function derivative() {
 		return new Constant(0.0);
 	}
 	
+	@Override
 	public String toString() {
 		return Double.toString(constant);
 	}
 	
+	@Override
 	public Integrable integral () {
 		return new Product(new Constant(constant), new Identity());
 	}

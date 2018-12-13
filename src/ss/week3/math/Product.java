@@ -10,21 +10,25 @@ public class Product implements Integrable{
 	 }
 	 
 	 //commands
-	 public double apply (double argument) {
+	 @Override
+	public double apply (double argument) {
 		 return one.apply(argument)*two.apply(argument);
 	 }
 	 
-	 public Function derivative () {
+	 @Override
+	public Function derivative () {
 		 Function derivativeOne = one.derivative();
 		 Function derivativeTwo = two.derivative();
 		 return new Sum(new Product(derivativeOne, two), new Product(one, derivativeTwo));
 	 }
 	 
-	 public String toString() {
+	 @Override
+	public String toString() {
 		 return one.toString() + "*" + two.toString();
 	 }
 	 
-	 public Integrable integral() {
+	 @Override
+	public Integrable integral() {
 		 return null;
 	 }
 	 

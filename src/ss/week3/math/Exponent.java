@@ -10,19 +10,23 @@ public class Exponent implements Integrable{
 	}
 	
 	//commands
+	@Override
 	public double apply (double argument) {
 		 return Math.pow(argument, this.n);
 	 }
 	 
-	 public Function derivative () {
+	 @Override
+	public Function derivative () {
 		 return new LinearProduct(new Constant(n), new Exponent(n-1));
 	 }
 	 
-	 public String toString() {
+	 @Override
+	public String toString() {
 		 return "x^" + this.n;
 	 }
 	 
-	 public Integrable integral() {
+	 @Override
+	public Integrable integral() {
 		 double value = (1/((double)n+1));
 		 return new Product(new Constant(value), new Exponent(n+1));
 	 }
