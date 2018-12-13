@@ -107,7 +107,13 @@ public class Game {
      * After each move, the changed game situation is printed.
      */
     private void play() {
-        // TODO: implement, see P-4.20
+      System.out.println(board.toString());
+      while(board.gameOver()==false) {
+        players[current].makeMove(board);
+        update();
+        current = (current +1) % 2;
+      }
+      printResult();
     }
 
     /**
