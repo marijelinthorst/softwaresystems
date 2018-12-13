@@ -153,3 +153,6 @@ local.properties
 .scala_dependencies
 
 .worksheet
+
+# Ik ben een MAC-gebruiker :(
+.DS_Store
