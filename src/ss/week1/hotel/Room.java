@@ -36,7 +36,8 @@ public class Room {
     	return guest;
     }
     
-    public String toString() {
+    @Override
+	public String toString() {
     	return "Room=" + number;
     }
 
