@@ -58,6 +58,7 @@ public class Hotel {
 	public Password getPassword () {
 		return checkinpassword;
 	}
+	@Override
 	public String toString() {
 		String b;
 		String c;
