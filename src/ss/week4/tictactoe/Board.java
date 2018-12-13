@@ -22,6 +22,7 @@ public class Board {
         getField(i) == Mark.EMPTY || getField(i) == Mark.XX || getField(i) == Mark.OO); */
     private Mark[] fields;
 
+    
     // -- Constructors -----------------------------------------------
 
     /**
@@ -185,7 +186,7 @@ public class Board {
     /*@ pure */
     public boolean hasRow(Mark m) {
       boolean row = false;
-      for (int i=0;i>=0 && i<=DIM*DIM;i=i+3) {
+      for (int i=0;i>=0 && i<DIM*DIM;i=i+3) {
         if (fields[i]== m && fields[i+1] == m && fields[i+2]==m) {
           row = true;
         }
@@ -204,7 +205,7 @@ public class Board {
     /*@ pure */
     public boolean hasColumn(Mark m) {
       Boolean colomn = false;
-      for (int i=0;i>=0 && i<=DIM*DIM;i++) {
+      for (int i=0;i>=0 && i<DIM;i++) {
         if (fields[i]== m && fields[i+3] == m && fields[i+6]==m) {
           colomn = true;
         }
