@@ -22,20 +22,61 @@ public class MapUtil {
       }
         return range.isEmpty();
     }
+    
     public static <K, V> Map<V, Set<K>> inverse(Map<K, V> map) {
-        // TODO: implement, see exercise P-5.3
-        return null;
+        Map<V, Set<K>> inversemap = new HashMap<V,Set<K>>();
+        Collection<V> values = map.values();
+        Set<K> keys = map.keySet();
+        for (V v: values) {
+          Set<K> set = new HashSet<>();
+          for (K k : keys) {
+              if (map.get(k).equals(v)) {
+                  set.add(k);
+              }
+          }
+          inversemap.put(v, set);
+        }
+        return inversemap;
 	}
+    
 	public static <K, V> Map<V, K> inverseBijection(Map<K, V> map) {
-        // TODO: implement, see exercise P-5.3
-        return null;
+	  Map<V, K> inversemap = new HashMap<V, K>();
+      Collection<V> values = map.values();
+      Set<K> keys = map.keySet();
+      for (V v: values) {
+        for (K k : keys) {
+            if (map.get(k).equals(v)) {
+              inversemap.put(v, k);
+            }
+        }
+      }
+      return inversemap;
 	}
+	
 	public static <K, V, W> boolean compatible(Map<K, V> f, Map<V, W> g) {
-        // TODO: implement, see exercise P-5.4
-        return false;
+	  Collection<V> values = f.values();
+	  Collection<V> keys = g.keySet();
+	  int count =0;
+	  for (V v: values) {
+	    if (!keys.contains(v)) {
+	      count++;
+	    }
+	  }
+        return count==0;
 	}
+	
 	public static <K, V, W> Map<K, W> compose(Map<K, V> f, Map<V, W> g) {
-        // TODO: implement, see exercise P-5.5
-        return null;
+        assert (compatible (f,g)==true);
+        Map<K, W> composedmap = new HashMap<K, W>();
+        Set<K> keysf = f.keySet();
+        Set<V> keysg = g.keySet();
+        for (V v: keysg) {
+          for (K k: keysf) {
+            if (f.get(k).equals(v)) {
+              composedmap.put(k, g.get(v));
+            }
+          }
+        }
+        return composedmap;
 	}
 }
