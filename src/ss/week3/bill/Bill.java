@@ -11,13 +11,13 @@ public class Bill {
 		public double getAmount();
 	}
 	
-	private SysoutPrinter standardprint;
+	//private SysoutPrinter standardprint;
 	private StringPrinter stringprint;
 	private double totalsum;
 	
 	// Constructs a Bill sending the output to a given Printer
 	public Bill() {	
-		standardprint = new SysoutPrinter();
+	//	standardprint = new SysoutPrinter();
 		stringprint = new StringPrinter();
 		
 	}

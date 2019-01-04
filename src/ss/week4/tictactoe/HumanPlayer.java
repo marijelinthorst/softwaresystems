@@ -28,10 +28,9 @@ public class HumanPlayer extends Player {
 
     // -- Commands ---------------------------------------------------
 
-    /*@
+    /*@ also
        requires board != null;
        ensures board.isField(\result) && board.isEmptyField(\result);
-
      */
     /**
      * Asks the user to input the field where to place the next mark. This is
