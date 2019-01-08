@@ -1,1 +1,3 @@
-Hearts jack
+Diamonds 10
+Spades 
+Hearts queen

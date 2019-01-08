@@ -8,6 +8,8 @@ import java.io.DataOutput;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 public class Card
 {
@@ -189,6 +191,19 @@ public class Card
 	  }
 	  return null;
 	}
+	
+	// P-6.8
+	public static Card read (ObjectInput in) throws EOFException{
+	  try {
+	    Card temp  = (Card) in.readObject();
+	    return temp;
+	  } catch (IOException e) {
+	    e.printStackTrace();
+	  } catch (ClassNotFoundException e) {
+	    e.printStackTrace();
+	  }
+	  return null;
+	}
   
 	
 	// ---- instance variables -----------------------------------
@@ -363,6 +378,11 @@ public class Card
 	//P-6.7
 	public void write (DataOutput out) throws IOException {
 	  out.writeChars(this.toString() + "\n");
+	}
+	
+	//P-6.7
+	public void write (ObjectOutput out) throws IOException{
+	  out.writeObject(this);
 	}
 	
 	// ---- main -----------------------------------------------

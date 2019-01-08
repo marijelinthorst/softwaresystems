@@ -54,7 +54,6 @@ public class CardTest {
             DataOutputStream dataOut = new DataOutputStream(new FileOutputStream(PATH + "card.dat"));
             card.write(dataOut);
             dataOut.close();
-            System.out.println(card.toString());
 
             DataInputStream dataIn = new DataInputStream(new FileInputStream(PATH + "card.dat"));
             Card card2 = Card.read(dataIn);
@@ -66,7 +65,7 @@ public class CardTest {
         }
     }
 
-    /** Test for writing and reading a card with object files.
+    /** Test for writing and reading a card with object files.*/
     @Test
     public void testReadingWritingObject() {
         try {
@@ -82,5 +81,5 @@ public class CardTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }
