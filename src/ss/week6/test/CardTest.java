@@ -35,12 +35,10 @@ public class CardTest {
             PrintWriter writer = new PrintWriter(new FileWriter(PATH + "card.txt"));
             card.write(writer);
             writer.close();
-            System.out.println(card.toString());
 
             BufferedReader reader = new BufferedReader(new FileReader(PATH + "card.txt"));
             Card card2 = Card.read(reader);
             reader.close();
-            
             assertEquals(card, card2);
 
         } catch (IOException e) {
@@ -49,13 +47,14 @@ public class CardTest {
     }
     
 
-    /** Test for writing and reading a card with data files.
+    /** Test for writing and reading a card with data files.*/
     @Test
     public void testReadingWritingData() {
         try {
             DataOutputStream dataOut = new DataOutputStream(new FileOutputStream(PATH + "card.dat"));
             card.write(dataOut);
             dataOut.close();
+            System.out.println(card.toString());
 
             DataInputStream dataIn = new DataInputStream(new FileInputStream(PATH + "card.dat"));
             Card card2 = Card.read(dataIn);
@@ -65,7 +64,7 @@ public class CardTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     /** Test for writing and reading a card with object files.
     @Test

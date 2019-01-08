@@ -3,6 +3,8 @@ package ss.week6.cards;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -146,24 +148,46 @@ public class Card
 	}
 	
 	// P-6.5
-	public static Card read(BufferedReader in) throws IOException {
+	public static Card read(BufferedReader in) throws EOFException {
       try {
-          Scanner scanner = new Scanner(in.readLine());
+        Scanner scanner = new Scanner(in.readLine());
 
-          String suit = scanner.hasNext() ? scanner.next() : "";
-          String rank = scanner.hasNext() ? scanner.next(): "";
-          char suitChar = Card.suitString2Char(suit);
-          char rankChar = Card.rankString2Char(rank);
+        String suit = scanner.hasNext() ? scanner.next() : "";
+        String rank = scanner.hasNext() ? scanner.next(): "";
+        char suitChar = Card.suitString2Char(suit);
+        char rankChar = Card.rankString2Char(rank);
 
-          if (isValidSuit(suitChar) && isValidRank(rankChar)) {
-            return new Card(suitChar, rankChar);
-            } else {
-            return null;
-          }
+        if (isValidSuit(suitChar) && isValidRank(rankChar)) {
+          return new Card(suitChar, rankChar);
+          } else {
+          return null;
+        }
       } catch (IOException e) {
           e.printStackTrace();
       }
       return null;
+	}
+	
+	// P-6.7
+	public static Card read (DataInput in) throws EOFException{
+	  try {
+	    char suit = in.readChar();
+	    while (!(in.readChar() == ' ')) {
+	    }
+	    char rank = in.readChar();
+	    
+	    suit = Character.toUpperCase(suit);
+	    rank = Character.toUpperCase(rank);
+
+        if (isValidSuit(suit) && isValidRank(rank)) {
+          return new Card(suit, rank);
+          } else {
+          return null;
+        }
+	  } catch (IOException e) {
+        e.printStackTrace();
+	  }
+	  return null;
 	}
   
 	
@@ -334,6 +358,11 @@ public class Card
 	public void write (PrintWriter printwriter) {
 	  printwriter.write(this.toString() + "\n");
 	  printwriter.flush();
+	}
+	
+	//P-6.7
+	public void write (DataOutput out) throws IOException {
+	  out.writeChars(this.toString() + "\n");
 	}
 	
 	// ---- main -----------------------------------------------
