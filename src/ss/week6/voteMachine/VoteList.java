@@ -16,8 +16,12 @@ public class VoteList extends Observable {
   
   // commands
   public void addVote(String party) {
+    if (votes.containsKey(party)) {
+      votes.replace(party, votes.get(party), votes.get(party) + 1);
+    } else {
+      this.votes.put(party, 1);
+    }
     size++;
-    this.votes.put(party, size);
     setChanged();
     notifyObservers("vote");
   }
