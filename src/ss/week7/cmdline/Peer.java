@@ -3,8 +3,8 @@ package ss.week7.cmdline;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 /**
@@ -29,8 +29,10 @@ public class Peer implements Runnable {
      * @param   nameArg name of the Peer-proces
      * @param   sockArg Socket of the Peer-proces
      */
-    public Peer(String nameArg, Socket sockArg) throws IOException
-    {
+    public Peer(String nameArg, Socket sockArg) throws IOException {
+      name = nameArg;
+      sock = sockArg;
+      
     }
 
     /**
@@ -38,6 +40,21 @@ public class Peer implements Runnable {
      * writes the characters to the default output.
      */
     public void run() {
+      boolean loop = true;
+      try {
+        InputStream inStream = sock.getInputStream();
+        in = new BufferedReader (new InputStreamReader(inStream));
+        while (loop) {
+          String line =  in.readLine();
+          System.out.println(line + "\n");
+          if (line != null && line.equals(EXIT)) { // line is nog leeg, kan niet checken
+            loop = false;
+            this.shutDown();
+          }
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
 
 
@@ -47,12 +64,35 @@ public class Peer implements Runnable {
      * On Peer.EXIT the method ends
      */
     public void handleTerminalInput() {
+      try {
+        String termInput = "Begin";
+        while (termInput!=null) {
+          termInput = readString("");
+          out.write(termInput);
+          out.newLine();
+          out.flush();
+          if (termInput.equals(EXIT)){
+            System.out.println("Exiting");
+            out.write("Exting");
+            termInput=null;
+            this.shutDown();
+          }
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
 
     /**
      * Closes the connection, the sockets will be terminated
      */
     public void shutDown() {
+      try {
+        sock.shutdownInput();
+        sock.shutdownOutput();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
 
     /**  returns name of the peer object*/
