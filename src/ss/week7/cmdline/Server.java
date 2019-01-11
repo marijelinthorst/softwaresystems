@@ -45,9 +45,9 @@ public class Server {
       // establish server socket
       try {
         ServerSocket s = new ServerSocket(port);
-        System.out.print("Listening to " + port);
+        System.out.print("Listening to " + port + "\n");
         sock = s.accept(); // wait for client connection
-        System.out.print("Connected");
+        System.out.print("Connected \n");
         Peer peer = new Peer(name, sock);
         
         
@@ -61,9 +61,6 @@ public class Server {
       } catch (IOException e) {
         e.printStackTrace();
       }
-      
-      
-      
       
     }
     

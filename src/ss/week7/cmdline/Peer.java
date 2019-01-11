@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 /**
@@ -46,8 +47,8 @@ public class Peer implements Runnable {
         in = new BufferedReader (new InputStreamReader(inStream));
         while (loop) {
           String line =  in.readLine();
-          System.out.println(line + "\n");
-          if (line != null && line.equals(EXIT)) { // line is nog leeg, kan niet checken
+          System.out.println(line);
+          if (line == null || line.equals(EXIT)) { 
             loop = false;
             this.shutDown();
           }
@@ -65,15 +66,16 @@ public class Peer implements Runnable {
      */
     public void handleTerminalInput() {
       try {
+        out = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
         String termInput = "Begin";
         while (termInput!=null) {
-          termInput = readString("");
+          termInput = readString();
           out.write(termInput);
           out.newLine();
           out.flush();
           if (termInput.equals(EXIT)){
             System.out.println("Exiting");
-            out.write("Exting");
+            out.write("Exiting");
             termInput=null;
             this.shutDown();
           }
@@ -88,8 +90,7 @@ public class Peer implements Runnable {
      */
     public void shutDown() {
       try {
-        sock.shutdownInput();
-        sock.shutdownOutput();
+        sock.close();
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -101,8 +102,8 @@ public class Peer implements Runnable {
     }
 
     /** read a line from the default input */
-    static public String readString(String tekst) {
-        System.out.print(tekst);
+    static public String readString() {
+        //System.out.print(tekst);
         String antw = null;
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(
