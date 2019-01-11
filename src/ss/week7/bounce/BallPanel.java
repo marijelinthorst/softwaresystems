@@ -18,6 +18,8 @@ public class BallPanel extends JPanel {
 
 	public BallPanel() {
 		this.balls = new java.util.ArrayList<>();
+		AnimateThread test = new AnimateThread();
+		test.start();
 	}
 
 	public void animate() {
@@ -30,6 +32,13 @@ public class BallPanel extends JPanel {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public class AnimateThread extends Thread{
+	  public void run() {
+	    animate();
+	    
+	  }
 	}
 
 	/** Add a new ball to the ball list and start the timer if not yet running. */
